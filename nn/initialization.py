@@ -1,42 +1,65 @@
 import numpy as np
 
-# def init_params_he():
-#     """
-#     He initialization — recommended for ReLU networks.
-
-#     Scales weights by sqrt(2 / fan_in) so pre-activations have
-#     unit variance even after passing through many inputs.
-
-#     With 784 inputs:
-#         W1 std dev = sqrt(2/784) ≈ 0.050  →  Z1 std dev ≈ 1.0  ✓
-#     """
-#     W1 = np.random.randn(10, 784) * np.sqrt(2 / 784)
-#     b1 = np.zeros((10, 1))
-#     W2 = np.random.randn(10, 10) * np.sqrt(2 / 10)
-#     b2 = np.zeros((10, 1))
-#     return W1, b1, W2, b2
-
-
-def init_params():
+def naive_init(input_size, hidden_size, output_size):
     """
     Naive random initialization.
-    
-    Initializes weights and biases for a 2-layer neural network from a 
-    standard normal distribution (mean=0, std=1) without any scaling.
-    
+    Draws weights from N(0,1) without scaling. Only suitable for quick experiments.
+    """
+    W1 = np.random.randn(hidden_size, input_size)
+    b1 = np.random.randn(hidden_size, 1)
+    W2 = np.random.randn(output_size, hidden_size)
+    b2 = np.random.randn(output_size, 1)
+    return W1, b1, W2, b2
+
+
+def he_init(input_size, hidden_size, output_size):
+    """
+    He (Kaiming) initialization.
+    Scales weights by sqrt(2 / fan_in). Recommended for ReLU / Leaky ReLU networks.
+    Keeps pre-activation variance ≈ 1 across layers.
+    """
+    W1 = np.random.randn(hidden_size, input_size) * np.sqrt(2.0 / input_size)
+    b1 = np.zeros((hidden_size, 1))
+    W2 = np.random.randn(output_size, hidden_size) * np.sqrt(2.0 / hidden_size)
+    b2 = np.zeros((output_size, 1))
+    return W1, b1, W2, b2
+
+
+def xavier_init(input_size, hidden_size, output_size):
+    """
+    Xavier (Glorot) initialization.
+    Scales weights by sqrt(1 / fan_in). Recommended for Sigmoid / Tanh networks.
+    Balances variance in forward and backward passes.
+    """
+    W1 = np.random.randn(hidden_size, input_size) * np.sqrt(1.0 / input_size)
+    b1 = np.zeros((hidden_size, 1))
+    W2 = np.random.randn(output_size, hidden_size) * np.sqrt(1.0 / hidden_size)
+    b2 = np.zeros((output_size, 1))
+    return W1, b1, W2, b2
+
+
+_INITIALIZERS = {
+    'naive':   naive_init,
+    'he':      he_init,
+    'xavier':  xavier_init,
+}
+
+
+def init_params(input_size, hidden_size, output_size, initializer='he'):
+    """
+    Dispatcher: initialise network weights by name.
+
+    Parameters
+    ----------
+    input_size  : int
+    hidden_size : int
+    output_size : int
+    initializer : str — 'naive', 'he', or 'xavier'
+
     Returns
     -------
-    W1 : numpy array of shape (10, 784)
-        Weights for the hidden layer.
-    b1 : numpy array of shape (10, 1)
-        Biases for the hidden layer.
-    W2 : numpy array of shape (10, 10)
-        Weights for the output layer.
-    b2 : numpy array of shape (10, 1)
-        Biases for the output layer.
+    W1, b1, W2, b2 : numpy arrays
     """
-    W1 = np.random.randn(10, 784)
-    b1 = np.random.randn(10, 1)
-    W2 = np.random.randn(10, 10)
-    b2 = np.random.randn(10, 1)
-    return W1, b1, W2, b2
+    if initializer not in _INITIALIZERS:
+        raise ValueError(f"Unknown initializer '{initializer}'. Choose from: {list(_INITIALIZERS)}")
+    return _INITIALIZERS[initializer](input_size, hidden_size, output_size)

@@ -1,16 +1,16 @@
 import numpy as np
 
 from nn.forward import forward_prop
-from nn.train import get_predictions
+from nn.trainer import get_predictions
 
 
-def make_predictions(X, W1, b1, W2, b2):
+def make_predictions(X, W1, b1, W2, b2, activation='relu'):
     """Run forward pass and return predicted class for each example in X."""
-    _, _, _, A2 = forward_prop(W1, b1, W2, b2, X)
+    _, _, _, A2 = forward_prop(W1, b1, W2, b2, X, activation=activation)
     return get_predictions(A2)
 
 
-def test_prediction(index, X_train, Y_train, W1, b1, W2, b2):
+def test_prediction(index, X_train, Y_train, W1, b1, W2, b2, activation='relu'):
     """
     Print the image at `index` to the terminal using ASCII art, 
     and show its true label and the model's prediction.
@@ -21,9 +21,10 @@ def test_prediction(index, X_train, Y_train, W1, b1, W2, b2):
     X_train  : (784, m) training data
     Y_train  : (m,)    true labels
     W1,b1,W2,b2 : trained parameters
+    activation  : Activation function name
     """
     current_image = X_train[:, index, None]
-    prediction = make_predictions(current_image, W1, b1, W2, b2)
+    prediction = make_predictions(current_image, W1, b1, W2, b2, activation=activation)
     label = Y_train[index]
 
     print(f"\nModel Prediction: {prediction[0]}")

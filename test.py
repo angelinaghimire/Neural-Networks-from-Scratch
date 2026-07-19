@@ -2,7 +2,7 @@ import numpy as np
 import config
 from nn.utils import load_data, split_data
 from nn.predict import test_prediction, make_predictions
-from nn.train import get_accuracy
+from nn.trainer import get_accuracy
 
 def main():
     print(f"Loading data from {config.DATA_PATH}...")
@@ -27,7 +27,7 @@ def main():
 
     # Evaluate on validation set
     print("Evaluating validation accuracy...")
-    val_preds = make_predictions(X_val, W1, b1, W2, b2)
+    val_preds = make_predictions(X_val, W1, b1, W2, b2, activation=config.ACTIVATION)
     val_acc = get_accuracy(val_preds, Y_val)
     print(f"Validation Accuracy: {val_acc:.4f}\n")
 
@@ -35,7 +35,7 @@ def main():
     print("Showing 3 random validation predictions:")
     for _ in range(3):
         idx = np.random.randint(0, X_val.shape[1])
-        test_prediction(idx, X_val, Y_val, W1, b1, W2, b2)
+        test_prediction(idx, X_val, Y_val, W1, b1, W2, b2, activation=config.ACTIVATION)
 
 if __name__ == "__main__":
     main()

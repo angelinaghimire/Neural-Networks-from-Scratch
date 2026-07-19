@@ -1,14 +1,6 @@
 import numpy as np
 import pandas as pd
 
-
-def one_hot(Y):
-    """Convert an integer label vector into a one-hot matrix (n_classes x m)."""
-    one_hot_Y = np.zeros((Y.size, Y.max() + 1))
-    one_hot_Y[np.arange(Y.size), Y] = 1
-    return one_hot_Y.T
-
-
 def load_data(path):
     """
     Load the MNIST CSV dataset.
@@ -53,3 +45,9 @@ def split_data(data, val_size=1000):
     X_train  = train[1:n] / 255.0
 
     return X_train, Y_train, X_val, Y_val
+
+def one_hot(Y):
+    """Convert an integer label vector into a one-hot matrix (n_classes x m)."""
+    one_hot_Y = np.zeros((Y.size, Y.max() + 1))
+    one_hot_Y[np.arange(Y.size), Y] = 1
+    return one_hot_Y.T

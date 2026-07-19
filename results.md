@@ -1,0 +1,70 @@
+# Experiment Results
+
+**Grid:** 200 iterations · lr=0.001 · hidden=64
+
+| # | Activation | Initializer | Loss | Optimizer | Train Acc | Val Acc |
+|---|------------|-------------|------|-----------|-----------|---------|
+| 1 | leaky_relu | he          | cross_entropy | rmsprop   | 0.9510    | 0.9410  |
+| 2 | relu       | he          | cross_entropy | adam      | 0.9463    | 0.9380  |
+| 3 | tanh       | xavier      | mse          | rmsprop   | 0.9510    | 0.9380  |
+| 4 | relu       | he          | cross_entropy | rmsprop   | 0.9484    | 0.9370  |
+| 5 | tanh       | xavier      | cross_entropy | rmsprop   | 0.9513    | 0.9340  |
+| 6 | leaky_relu | he          | cross_entropy | adam      | 0.9441    | 0.9300  |
+| 7 | relu       | he          | mse          | adam      | 0.9375    | 0.9290  |
+| 8 | relu       | he          | mse          | rmsprop   | 0.9355    | 0.9240  |
+| 9 | tanh       | xavier      | cross_entropy | adam      | 0.9338    | 0.9240  |
+| 10 | tanh       | xavier      | mse          | adam      | 0.9336    | 0.9230  |
+| 11 | leaky_relu | he          | mse          | rmsprop   | 0.9304    | 0.9220  |
+| 12 | leaky_relu | he          | mse          | adam      | 0.9376    | 0.9220  |
+| 13 | sigmoid    | xavier      | cross_entropy | rmsprop   | 0.9167    | 0.9030  |
+| 14 | sigmoid    | xavier      | cross_entropy | adam      | 0.8964    | 0.8720  |
+| 15 | sigmoid    | xavier      | mse          | rmsprop   | 0.8658    | 0.8460  |
+| 16 | sigmoid    | xavier      | mse          | adam      | 0.8452    | 0.8350  |
+| 17 | sigmoid    | naive       | cross_entropy | rmsprop   | 0.7908    | 0.7800  |
+| 18 | tanh       | naive       | cross_entropy | rmsprop   | 0.7874    | 0.7790  |
+| 19 | relu       | naive       | cross_entropy | rmsprop   | 0.7656    | 0.7640  |
+| 20 | leaky_relu | naive       | cross_entropy | rmsprop   | 0.7734    | 0.7590  |
+| 21 | sigmoid    | naive       | mse          | rmsprop   | 0.7202    | 0.7180  |
+| 22 | sigmoid    | naive       | cross_entropy | adam      | 0.6638    | 0.6540  |
+| 23 | sigmoid    | naive       | mse          | adam      | 0.6666    | 0.6500  |
+| 24 | tanh       | naive       | cross_entropy | adam      | 0.6460    | 0.6340  |
+| 25 | relu       | naive       | cross_entropy | adam      | 0.6581    | 0.6270  |
+| 26 | leaky_relu | naive       | cross_entropy | adam      | 0.5837    | 0.5870  |
+| 27 | tanh       | naive       | mse          | rmsprop   | 0.5083    | 0.4800  |
+| 28 | leaky_relu | naive       | mse          | adam      | 0.4219    | 0.4090  |
+| 29 | tanh       | xavier      | cross_entropy | sgd       | 0.3566    | 0.3620  |
+| 30 | tanh       | naive       | mse          | adam      | 0.3514    | 0.3520  |
+| 31 | leaky_relu | naive       | mse          | rmsprop   | 0.3330    | 0.3300  |
+| 32 | leaky_relu | he          | cross_entropy | sgd       | 0.2780    | 0.2890  |
+| 33 | relu       | he          | cross_entropy | sgd       | 0.2602    | 0.2620  |
+| 34 | relu       | naive       | mse          | rmsprop   | 0.2390    | 0.2260  |
+| 35 | relu       | naive       | mse          | adam      | 0.2335    | 0.2160  |
+| 36 | relu       | he          | cross_entropy | momentum  | 0.1966    | 0.2120  |
+| 37 | leaky_relu | he          | cross_entropy | momentum  | 0.2345    | 0.2030  |
+| 38 | tanh       | xavier      | mse          | sgd       | 0.1913    | 0.1900  |
+| 39 | relu       | naive       | cross_entropy | momentum  | 0.1800    | 0.1680  |
+| 40 | relu       | naive       | cross_entropy | sgd       | 0.1720    | 0.1640  |
+| 41 | leaky_relu | naive       | cross_entropy | sgd       | 0.1631    | 0.1620  |
+| 42 | tanh       | xavier      | cross_entropy | momentum  | 0.1717    | 0.1620  |
+| 43 | tanh       | naive       | cross_entropy | sgd       | 0.1434    | 0.1540  |
+| 44 | sigmoid    | naive       | cross_entropy | momentum  | 0.1438    | 0.1490  |
+| 45 | relu       | naive       | mse          | momentum  | 0.1368    | 0.1440  |
+| 46 | relu       | he          | mse          | sgd       | 0.1404    | 0.1310  |
+| 47 | tanh       | xavier      | mse          | momentum  | 0.1310    | 0.1310  |
+| 48 | leaky_relu | naive       | mse          | momentum  | 0.1160    | 0.1290  |
+| 49 | sigmoid    | naive       | cross_entropy | sgd       | 0.1119    | 0.1220  |
+| 50 | sigmoid    | xavier      | mse          | sgd       | 0.0984    | 0.1110  |
+| 51 | leaky_relu | he          | mse          | momentum  | 0.1138    | 0.1040  |
+| 52 | leaky_relu | naive       | cross_entropy | momentum  | 0.1149    | 0.1000  |
+| 53 | leaky_relu | naive       | mse          | sgd       | 0.0977    | 0.0990  |
+| 54 | sigmoid    | xavier      | cross_entropy | momentum  | 0.0951    | 0.0990  |
+| 55 | tanh       | naive       | cross_entropy | momentum  | 0.0888    | 0.0970  |
+| 56 | sigmoid    | naive       | mse          | momentum  | 0.1075    | 0.0970  |
+| 57 | sigmoid    | xavier      | cross_entropy | sgd       | 0.1017    | 0.0960  |
+| 58 | sigmoid    | naive       | mse          | sgd       | 0.0860    | 0.0940  |
+| 59 | relu       | naive       | mse          | sgd       | 0.0834    | 0.0910  |
+| 60 | relu       | he          | mse          | momentum  | 0.0886    | 0.0850  |
+| 61 | leaky_relu | he          | mse          | sgd       | 0.0859    | 0.0840  |
+| 62 | sigmoid    | xavier      | mse          | momentum  | 0.0816    | 0.0840  |
+| 63 | tanh       | naive       | mse          | sgd       | 0.0720    | 0.0710  |
+| 64 | tanh       | naive       | mse          | momentum  | 0.0670    | 0.0580  |
