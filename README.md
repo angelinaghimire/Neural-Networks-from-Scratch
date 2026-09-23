@@ -1,6 +1,3 @@
-<parameter name="CodeContent"># Neural Networks from Scratch
-
----
 
 ## Features
 
