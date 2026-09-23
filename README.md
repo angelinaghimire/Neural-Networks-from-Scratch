@@ -1,50 +1,18 @@
 <parameter name="CodeContent"># Neural Networks from Scratch
 
-A clean, fully-modular implementation of a 2-layer neural network in pure NumPy — no deep-learning frameworks, no magic.  
-Built to be readable, extensible, and a practical reference for understanding how neural networks actually work.
-
 ---
 
 ## Features
 
-- ✅ **4 Activations** — ReLU, Leaky ReLU, Tanh, Sigmoid
-- ✅ **3 Initializers** — He (Kaiming), Xavier (Glorot), Naive
-- ✅ **2 Loss Functions** — Cross-Entropy, MSE
-- ✅ **4 Optimizers** — SGD, SGD + Momentum, RMSProp, Adam
-- ✅ **Single config file** — change any option without touching source code
-- ✅ **Experiment grid** — benchmark all combinations automatically
+- **4 Activations** — ReLU, Leaky ReLU, Tanh, Sigmoid
+- **3 Initializers** — He (Kaiming), Xavier (Glorot), Naive
+- **2 Loss Functions** — Cross-Entropy, MSE
+- **4 Optimizers** — SGD, SGD + Momentum, RMSProp, Adam
+- **Single config file** — change any option without touching source code
+- **Experiment grid** — benchmark all combinations automatically
 
 ---
 
-## Project Structure
-
-```
-Neural-Networks-from-Scratch/
-│
-├── config.py            # All hyperparameters and framework options
-├── trainingloop.py      # Train and save a model
-├── test.py              # Load a saved model and evaluate
-├── experiment.py        # Grid search across all option combos → results.md
-│
-├── nn/
-│   ├── activations.py   # ReLU, Leaky ReLU, Tanh, Sigmoid + dispatchers
-│   ├── initialization.py# He, Xavier, Naive weight initializers
-│   ├── losses.py        # Cross-Entropy, MSE — forward and gradient
-│   ├── optimizers.py    # SGD, Momentum, RMSProp, Adam
-│   ├── forward.py       # Forward propagation
-│   ├── backward.py      # Backpropagation
-│   ├── trainer.py       # gradient_descent() training loop
-│   ├── predict.py       # Inference + ASCII art visualizer
-│   └── utils.py         # Data loading, splitting, one-hot encoding
-│
-├── data/
-│   └── train.csv        # MNIST training data (CSV format)
-│
-├── requirements.txt
-└── results.md           # Auto-generated experiment results table
-```
-
----
 
 ## Quick Start
 
@@ -108,38 +76,6 @@ OPTIMIZER    = "adam"             # 'sgd' | 'momentum' | 'rmsprop' | 'adam'
 | | `rmsprop` | Adaptive lr per parameter; β=0.9 |
 | | `adam` | Momentum + RMSProp; best default |
 
-### Learning Rate Guide
-
-| Optimizer | Recommended `ALPHA` |
-|-----------|---------------------|
-| `sgd` | 0.1 |
-| `momentum` | 0.01 |
-| `rmsprop` | 0.001 |
-| `adam` | 0.001 |
-
----
-
-## Extending the Framework
-
-### Add a new activation
-1. Implement `my_act(Z)` and `my_act_deriv(Z)` in [`nn/activations.py`](nn/activations.py).
-2. Add `'my_act': (my_act, my_act_deriv)` to the `_ACTIVATIONS` dict.
-3. Set `ACTIVATION = "my_act"` in `config.py`.
-
-### Add a new initializer
-1. Implement `my_init(input_size, hidden_size, output_size)` in [`nn/initialization.py`](nn/initialization.py).
-2. Add `'my_init': my_init` to the `_INITIALIZERS` dict.
-
-### Add a new optimizer
-1. Create a class with an `__init__(self, alpha)` and a `step(W1,b1,W2,b2,dW1,db1,dW2,db2)` method in [`nn/optimizers.py`](nn/optimizers.py).
-2. Add it to the `get_optimizer()` factory function.
-
-### Add a new loss
-1. Implement `my_loss(A2, Y_one_hot)` and `my_loss_grad(A2, Y_one_hot)` in [`nn/losses.py`](nn/losses.py).
-2. Add the name to `get_loss()` and `get_loss_grad()`.
-
----
-
 ## Dataset
 
 This project uses the [MNIST handwritten digit dataset](http://yann.lecun.com/exdb/mnist/) in CSV format (e.g. from [Kaggle](https://www.kaggle.com/datasets/oddrationale/mnist-in-csv)).
@@ -149,14 +85,6 @@ This project uses the [MNIST handwritten digit dataset](http://yann.lecun.com/ex
 
 ---
 
-## Requirements
-
-```
-numpy
-pandas
-```
-
----
 
 ## Experiment Results
 
@@ -164,9 +92,9 @@ pandas
 
 | # | Activation | Initializer | Loss | Optimizer | Val Acc |
 |---|-----------|------------|------|----------|---------|
-| 🥇 | leaky_relu | he | cross_entropy | rmsprop | **94.10%** |
-| 🥈 | relu | he | cross_entropy | adam | **93.80%** |
-| 🥉 | tanh | xavier | mse | rmsprop | **93.80%** |
+| 1 | leaky_relu | he | cross_entropy | rmsprop | **94.10%** |
+| 2 | relu | he | cross_entropy | adam | **93.80%** |
+| 3 | tanh | xavier | mse | rmsprop | **93.80%** |
 | 4 | relu | he | cross_entropy | rmsprop | 93.70% |
 | 5 | tanh | xavier | cross_entropy | rmsprop | 93.40% |
 | 6 | leaky_relu | he | cross_entropy | adam | 93.00% |
